@@ -7,6 +7,7 @@ import nativeRendering from './native-rendering';
 import viewToUIView from './view-to-uiview';
 import architecture from './architecture';
 import simpleAnimation from './simple-animation';
+import jsThreadDrawback from './js-thread-drawback';
 import workletRuntime from './worklet-runtime';
 import gestures from './gestures';
 import quote from './quote';
@@ -30,6 +31,7 @@ export const slides: SlideDef[] = [
   viewToUIView,
   architecture,
   simpleAnimation,
+  jsThreadDrawback,
   workletRuntime,
   gestures,
   quote,

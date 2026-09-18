@@ -1,0 +1,41 @@
+/* ---------- Drawback of animating from the JS thread ---------- */
+
+.jd-tick {
+  font-size: 16px;
+  font-weight: 600;
+  fill: #fff;
+}
+
+.jd-work {
+  font-size: 17px;
+  font-weight: 600;
+  fill: #1a1a1a;
+}
+
+.jd-frame {
+  font-size: 16px;
+  font-weight: 600;
+  fill: #fff;
+}
+
+.jd-stale {
+  font-size: 16px;
+  fill: #f0b4a1;
+}
+
+.jd-frozen {
+  font-size: 17px;
+  font-weight: 600;
+  fill: #f0b4a1;
+}
+
+.jd-takeaway {
+  font-size: 24px;
+  color: var(--muted);
+  margin: 36px 0 0;
+  animation: fade-up 420ms ease-out 500ms both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .jd-takeaway { animation: none; }
+}
