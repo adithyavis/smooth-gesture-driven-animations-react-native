@@ -1,4 +1,4 @@
-import '../components/layouts.css';
+import { Code } from '../components/Code';
 import type { SlideDef } from '../deck/types';
 import './view-to-uiview.css';
 
@@ -58,16 +58,12 @@ function ViewToUIView() {
       <div className="v2u-row">
         <figure className="v2u-side">
           <figcaption>You write</figcaption>
-          <div className="layout-code">
-            <pre><code>{JSX}</code></pre>
-          </div>
+          <Code lang="jsx">{JSX}</Code>
         </figure>
         <Arrow />
         <figure className="v2u-side">
           <figcaption>React Native creates</figcaption>
-          <div className="layout-code">
-            <pre><code>{UIKIT}</code></pre>
-          </div>
+          <Code lang="swift">{UIKIT}</Code>
         </figure>
         <Arrow />
         <figure className="v2u-side">

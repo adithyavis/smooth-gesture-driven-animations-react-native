@@ -96,4 +96,12 @@
   white-space: pre;
   color: #dbe4f3;
 }
+.layout-code .tok-keyword { color: #ff7b72; }
+.layout-code .tok-type    { color: #7ee787; }
+.layout-code .tok-string  { color: #a5d6ff; }
+.layout-code .tok-number  { color: #79c0ff; }
+.layout-code .tok-prop    { color: #ffa657; }
+.layout-code .tok-fn,
+.layout-code .tok-member  { color: #d2a8ff; }
+.layout-code .tok-comment { color: #8b949e; font-style: italic; }
 .layout-code h2 { font-size: 38px; margin-bottom: 30px; }
