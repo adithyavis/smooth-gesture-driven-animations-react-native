@@ -17,14 +17,21 @@
   align-items: center;
 }
 
-.principles-demos figcaption {
-  margin-top: 18px;
-  font-size: 22px;
-  color: var(--muted);
-  opacity: 0.4;
+.verdict {
+  margin-top: 14px;
+  opacity: 0.3;
   transition: opacity 300ms ease;
 }
-.principles-demos figure.active figcaption {
-  color: var(--fg);
-  opacity: 1;
+.principles-demos figure.active .verdict { opacity: 1; }
+
+.verdict svg {
+  display: block;
+  width: 44px;
+  height: 44px;
+  fill: none;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
+.verdict.bad svg  { stroke: #ff453a; }
+.verdict.good svg { stroke: #30d158; }

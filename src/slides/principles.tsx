@@ -2,6 +2,16 @@ import { VolumeSlider } from '../components/VolumeSlider';
 import type { SlideDef } from '../deck/types';
 import './principles.css';
 
+function Verdict({ good }: { good: boolean }) {
+  return (
+    <figcaption className={`verdict ${good ? 'good' : 'bad'}`}>
+      <svg viewBox="0 0 24 24" role="img" aria-label={good ? 'Good' : 'Bad'}>
+        <path d={good ? 'M5 12.5l4.5 4.5L19 7.5' : 'M6.5 6.5l11 11M17.5 6.5l-11 11'} />
+      </svg>
+    </figcaption>
+  );
+}
+
 /** Two volume sliders side by side; only the one being discussed moves. */
 function Principles({ active }: { active: 'left' | 'right' }) {
   return (
@@ -10,11 +20,11 @@ function Principles({ active }: { active: 'left' | 'right' }) {
       <div className="principles-demos">
         <figure className={active === 'left' ? 'active' : ''}>
           <VolumeSlider mode="plain" playing={active === 'left'} />
-          <figcaption>Follows your finger</figcaption>
+          <Verdict good={false} />
         </figure>
         <figure className={active === 'right' ? 'active' : ''}>
           <VolumeSlider mode="rubber" playing={active === 'right'} />
-          <figcaption>Pushes back at the limit</figcaption>
+          <Verdict good />
         </figure>
       </div>
     </div>
