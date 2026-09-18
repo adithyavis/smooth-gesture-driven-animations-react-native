@@ -1,0 +1,239 @@
+/* ---------- Example 2: Google Photos grid ---------- */
+
+.gp-row {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+/* The three points; the current one is bright, the others step back. */
+.gp-points {
+  flex: none;
+  width: 320px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: point;
+}
+.gp-points li {
+  counter-increment: point;
+  position: relative;
+  padding-left: 44px;
+  margin-bottom: 26px;
+  font-size: 21px;
+  line-height: 1.4;
+  color: var(--muted);
+  opacity: 0.45;
+  transition: opacity 300ms ease, color 300ms ease;
+}
+.gp-points li::before {
+  content: counter(point);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 16px;
+  font-weight: 700;
+  background: #242c3a;
+  color: #dbe8f7;
+}
+.gp-points li.current {
+  opacity: 1;
+  color: var(--fg);
+}
+.gp-points li.current::before {
+  background: var(--accent);
+  color: #0f1117;
+}
+.gp-points code {
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.9em;
+  color: #d2a8ff;
+}
+
+.gp-visual {
+  flex: 1;
+  min-width: 0;
+  animation: fade-up 380ms ease-out both;
+}
+
+/* ---- Mini photo grids ---- */
+
+.gp-grid {
+  position: relative;
+  overflow: hidden;
+  border-radius: 14px;
+  background: #000;
+  border: 3px solid #2c2c2e;
+  box-sizing: content-box;
+  transition: opacity 300ms ease;
+}
+.gp-grid.active { border-color: var(--accent); }
+.gp-grid.dim { opacity: 0.4; }
+
+.gp-header {
+  display: flex;
+  align-items: center;
+  padding-left: 8px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #dbe4f3;
+}
+.gp-header.mark {
+  background: rgba(110, 168, 254, 0.35);
+  color: #fff;
+}
+
+.gp-photos {
+  display: flex;
+}
+.gp-photos span {
+  flex: 1;
+  margin: 1px;
+  border-radius: 2px;
+}
+
+.gp-lists {
+  display: flex;
+  justify-content: center;
+  gap: 48px;
+}
+.gp-list {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.gp-list figcaption {
+  margin-top: 12px;
+  font-size: 18px;
+  font-weight: 600;
+  text-align: center;
+}
+.gp-list figcaption span {
+  display: block;
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--muted);
+}
+
+/* ---- Step 2: scrollTo arrows between the synced lists ---- */
+
+.gp-lists.synced { gap: 0; margin-bottom: 18px; }
+.gp-sync-cell {
+  display: flex;
+  align-items: flex-start;
+}
+.gp-arrow {
+  position: relative;
+  width: 64px;
+  height: 2px;
+  margin-top: 100px;
+  background: #9fb3c8;
+}
+.gp-arrow::after {
+  content: "";
+  position: absolute;
+  top: -5px;
+  border: 6px solid transparent;
+}
+.gp-arrow.left::after { left: -8px; border-right-color: #9fb3c8; border-left: 0; }
+.gp-arrow.right::after { right: -8px; border-left-color: #9fb3c8; border-right: 0; }
+.gp-arrow span {
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 12px;
+  color: var(--muted);
+}
+.gp-arrow.left { margin-left: 8px; margin-right: 8px; }
+.gp-arrow.right { margin-left: 8px; margin-right: 8px; }
+
+/* ---- Step 3: offsets beside each row, and the scrubber ---- */
+
+.gp-offsets {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.gp-ruler-wrap {
+  position: relative;
+  flex: none;
+  display: flex;
+}
+.gp-ruler {
+  position: relative;
+  overflow: hidden;
+  width: 44px;
+  margin-left: 8px;
+}
+.gp-ruler span {
+  position: absolute;
+  left: 0;
+  display: flex;
+  align-items: flex-start;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 12px;
+  color: var(--muted);
+  border-top: 1px solid rgba(159, 179, 200, 0.35);
+  padding-top: 1px;
+  width: 44px;
+}
+.gp-ruler span.mark {
+  color: #fff;
+  font-weight: 700;
+  border-top-color: var(--accent);
+}
+.gp-ruler > div { position: relative; }
+
+/* The scrubber inside the grid: a date label beside the handle on the right edge. */
+.gp-scrub {
+  position: absolute;
+  right: 3px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.gp-scrub-label {
+  padding: 3px 8px;
+  border-radius: 10px;
+  background: #fff;
+  color: #0f1117;
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+/* The handle: a small white pill with up and down arrows, like Google Photos. */
+.gp-scrub-thumb {
+  position: relative;
+  width: 16px;
+  height: 100%;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+.gp-scrub-thumb::before,
+.gp-scrub-thumb::after {
+  content: "";
+  position: absolute;
+  left: 4px;
+  border: 4px solid transparent;
+}
+.gp-scrub-thumb::before { top: 4px; border-bottom-color: #3c4043; border-top: 0; }
+.gp-scrub-thumb::after { bottom: 4px; border-top-color: #3c4043; border-bottom: 0; }
+
+.layout-google-photos .layout-code pre { padding: 16px 20px; }
+.layout-google-photos .layout-code code { font-size: 14px; line-height: 1.5; }
+.gp-offsets .layout-code { flex: 1; min-width: 0; }
+.gp-offsets .layout-code code { font-size: 13px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .gp-visual { animation: none; }
+}

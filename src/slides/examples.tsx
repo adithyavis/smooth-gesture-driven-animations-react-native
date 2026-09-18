@@ -1,22 +1,31 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, type CSSProperties } from 'react';
 import { Code } from '../components/Code';
 import type { SlideDef } from '../deck/types';
 import './examples.css';
 
 /** One screen recording per slide, under the same title position as the other slides. */
-function Example({ title, src }: { title: string; src: string }) {
+function Example({ title, src, aspect }: {
+  title: string;
+  src: string;
+  /** Width / height of the recording, so the frame fits it exactly. */
+  aspect: number;
+}) {
   return (
     <div className="layout-threads layout-fill">
       <h2>{title}</h2>
       <figure className="ex-figure">
-        <video src={src} autoPlay muted loop playsInline className="ex-video" />
+        <video src={src} autoPlay muted loop playsInline className="ex-video" style={{ aspectRatio: aspect }} />
       </figure>
     </div>
   );
 }
 
 export const example1: SlideDef = {
-  content: <Example title="Example 1" src="/videos/x.mp4" />,
+  content: <Example title="Example 1" src="/videos/x.mp4" aspect={720 / 1616} />,
+};
+
+export const example2: SlideDef = {
+  content: <Example title="Example 2" src="/videos/google_photos.mp4" aspect={1170 / 2532} />,
 };
 
 /** Where the X profile header is at each scroll offset. */
@@ -117,12 +126,13 @@ const tabBarStyle = useAnimatedStyle(() => ({
 /** Plays `src` forward from `start` seconds to the end, then backward to `start`,
  *  forever. Browsers won't play video in reverse, so the backward half seeks
  *  frame by frame, keeping real-time speed and skipping frames if a seek is slow. */
-function PingPongVideo({ src, start, rate = 1, className }: {
+function PingPongVideo({ src, start, rate = 1, className, style }: {
   src: string;
   start: number;
   /** Playback speed, both ways. */
   rate?: number;
   className?: string;
+  style?: CSSProperties;
 }) {
   const ref = useRef<HTMLVideoElement>(null);
 
@@ -172,7 +182,7 @@ function PingPongVideo({ src, start, rate = 1, className }: {
     };
   }, [start, rate]);
 
-  return <video ref={ref} src={src} className={className} muted playsInline preload="auto" />;
+  return <video ref={ref} src={src} className={className} style={style} muted playsInline preload="auto" />;
 }
 
 function TabBarSnap() {
@@ -181,7 +191,8 @@ function TabBarSnap() {
       <h2>Example 1</h2>
       <div className="ex-row">
         <div className="ex-left"><Code lang="jsx" mark={[[7, 10]]}>{TAB_BAR_CODE}</Code></div>
-        <PingPongVideo src="/videos/x.mp4" start={3.5} rate={3} className="ex-video" />
+        <PingPongVideo src="/videos/x.mp4" start={3.5} rate={3} className="ex-video"
+          style={{ aspectRatio: 720 / 1616 }} />
       </div>
     </div>
   );

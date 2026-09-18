@@ -7,11 +7,10 @@
   animation: fade-up 460ms cubic-bezier(0.22, 0.9, 0.24, 1) 120ms both;
 }
 
-/* Portrait screen recordings (720 × 1616). */
+/* Portrait screen recordings; each slide sets its own aspect ratio. */
 .ex-video {
   display: block;
   height: 450px;
-  aspect-ratio: 720 / 1616;
   object-fit: contain;
   border-radius: 18px;
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);

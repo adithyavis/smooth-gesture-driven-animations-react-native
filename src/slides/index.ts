@@ -13,6 +13,7 @@ import * as reanimatedSimple from './reanimated-simple';
 import * as gestureDriven from './gesture-driven';
 import gestureExamples from './gesture-examples';
 import * as examples from './examples';
+import googlePhotos from './google-photos';
 import quote from './quote';
 import thanks from './thanks';
 
@@ -44,6 +45,8 @@ export const slides: SlideDef[] = [
   examples.example1,
   examples.example1Sequence,
   examples.example1TabBar,
+  examples.example2,
+  googlePhotos,
   quote,
   thanks,
 ];
