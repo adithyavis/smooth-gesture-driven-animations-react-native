@@ -113,11 +113,11 @@ function Menu() {
 
 const STEPS = [
   {
-    title: 'Simple animation',
+    title: 'Simple animation with Animated',
     left: <Code lang="jsx" mark={[5, 9]}>{CODE}</Code>,
   },
   {
-    title: 'Simple animation',
+    title: 'Simple animation with Animated',
     left: (
       <div>
         <HandoffTimeline />
@@ -125,7 +125,7 @@ const STEPS = [
     ),
   },
   {
-    title: "Simple animation",
+    title: "Simple animation with Animated",
     left: <Menu />,
   },
 ];
