@@ -1,0 +1,159 @@
+/* ---------- Other gestures ---------- */
+
+.ge-row {
+  display: flex;
+  justify-content: space-between;
+  animation: fade-up 420ms ease-out both;
+}
+
+.ge-item {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.ge-item figcaption {
+  margin-top: 14px;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.ge-box {
+  position: absolute;
+  background: #0a84ff;
+  border-radius: 8px;
+}
+
+/* Fingers start hidden and scripted; no hover-style transition. */
+.ge-finger {
+  opacity: 0;
+  transition: none;
+}
+
+/* ---- Pinch: fingers spread along the diagonal, the box grows ---- */
+
+.ge-pinch-box { animation: ge-pinch-box 3600ms infinite; }
+.ge-pinch-a { animation: ge-pinch-a 3600ms infinite; }
+.ge-pinch-b { animation: ge-pinch-b 3600ms infinite; }
+
+@keyframes ge-pinch-box {
+  0%, 12% { transform: scale(1); animation-timing-function: ease-in-out; }
+  40%, 55% { transform: scale(1.9); animation-timing-function: ease-in-out; }
+  75%, 100% { transform: scale(1); }
+}
+
+@keyframes ge-pinch-a {
+  0%      { opacity: 0; transform: translate(-24px, -24px) scale(1.25); }
+  8%      { opacity: 1; transform: translate(-24px, -24px) scale(1); }
+  12%     { opacity: 1; transform: translate(-24px, -24px) scale(0.86); animation-timing-function: ease-in-out; }
+  40%, 55% { transform: translate(-62px, -62px) scale(0.86); animation-timing-function: ease-in-out; }
+  75%     { opacity: 1; transform: translate(-24px, -24px) scale(0.86); }
+  80%     { opacity: 1; transform: translate(-24px, -24px) scale(1); }
+  88%, 100% { opacity: 0; transform: translate(-24px, -24px) scale(1.25); }
+}
+
+@keyframes ge-pinch-b {
+  0%      { opacity: 0; transform: translate(24px, 24px) scale(1.25); }
+  8%      { opacity: 1; transform: translate(24px, 24px) scale(1); }
+  12%     { opacity: 1; transform: translate(24px, 24px) scale(0.86); animation-timing-function: ease-in-out; }
+  40%, 55% { transform: translate(62px, 62px) scale(0.86); animation-timing-function: ease-in-out; }
+  75%     { opacity: 1; transform: translate(24px, 24px) scale(0.86); }
+  80%     { opacity: 1; transform: translate(24px, 24px) scale(1); }
+  88%, 100% { opacity: 0; transform: translate(24px, 24px) scale(1.25); }
+}
+
+/* ---- Rotate: the hand and the card turn together ---- */
+
+.ge-rotate-box { animation: ge-rotate 3600ms infinite; }
+.ge-rotate-hand {
+  position: absolute;
+  width: 0;
+  height: 0;
+  animation: ge-rotate 3600ms infinite;
+}
+.ge-rotate-finger { animation: ge-rotate-finger 3600ms infinite; }
+
+@keyframes ge-rotate {
+  0%, 12% { transform: rotate(0deg); animation-timing-function: ease-in-out; }
+  42%, 55% { transform: rotate(70deg); animation-timing-function: ease-in-out; }
+  75%, 100% { transform: rotate(0deg); }
+}
+
+@keyframes ge-rotate-finger {
+  0%      { opacity: 0; transform: scale(1.25); }
+  8%      { opacity: 1; transform: scale(1); }
+  12%, 75% { opacity: 1; transform: scale(0.86); }
+  80%     { opacity: 1; transform: scale(1); }
+  88%, 100% { opacity: 0; transform: scale(1.25); }
+}
+
+/* ---- Fling: drag, let go, the card flies off; the next one takes its place ---- */
+
+.ge-card-under {
+  position: absolute;
+  background: #2c3a4f;
+  border-radius: 8px;
+}
+.ge-fling-card { animation: ge-fling-card 3600ms infinite; }
+.ge-fling-finger { animation: ge-fling-finger 3600ms infinite; }
+
+@keyframes ge-fling-card {
+  0%, 14% { opacity: 1; transform: translate(0, 0) rotate(0deg) scale(1); animation-timing-function: ease-in; }
+  30%     { opacity: 1; transform: translate(34px, -6px) rotate(5deg) scale(1); animation-timing-function: cubic-bezier(0.1, 0.7, 0.3, 1); }
+  46%     { opacity: 1; transform: translate(260px, -40px) rotate(24deg) scale(1); }
+  47%     { opacity: 0; transform: translate(0, 0) rotate(0deg) scale(0.9); }
+  62%     { opacity: 1; transform: translate(0, 0) rotate(0deg) scale(1); }
+  100%    { opacity: 1; transform: translate(0, 0) rotate(0deg) scale(1); }
+}
+
+@keyframes ge-fling-finger {
+  0%      { opacity: 0; transform: translate(0, 0) scale(1.25); }
+  8%      { opacity: 1; transform: translate(0, 0) scale(1); }
+  14%     { opacity: 1; transform: translate(0, 0) scale(0.86); animation-timing-function: ease-in; }
+  30%     { opacity: 1; transform: translate(34px, -6px) scale(0.86); }
+  34%     { opacity: 1; transform: translate(44px, -8px) scale(1); }
+  42%, 100% { opacity: 0; transform: translate(44px, -8px) scale(1.25); }
+}
+
+/* ---- Double tap: two taps, a heart pops and fades ---- */
+
+.ge-photo {
+  position: absolute;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #3a6ea5 0%, #7b5ea7 55%, #d0748a 100%);
+}
+.ge-heart {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  font-size: 76px;
+  line-height: 1;
+  color: #ff3b5c;
+  text-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+  opacity: 0;
+  animation: ge-heart 3600ms infinite;
+}
+.ge-tap-finger { animation: ge-tap-finger 3600ms infinite; }
+
+@keyframes ge-heart {
+  0%, 27% { opacity: 0; transform: scale(0); animation-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1); }
+  36%     { opacity: 1; transform: scale(1.2); animation-timing-function: ease-out; }
+  42%, 62% { opacity: 1; transform: scale(1); animation-timing-function: ease-in; }
+  72%, 100% { opacity: 0; transform: scale(0.6); }
+}
+
+@keyframes ge-tap-finger {
+  0%      { opacity: 0; transform: translate(0, 50px) scale(1.25); }
+  8%      { opacity: 1; transform: translate(0, 50px) scale(1); }
+  13%     { opacity: 1; transform: translate(0, 50px) scale(0.8); }
+  17%     { opacity: 1; transform: translate(0, 50px) scale(1); }
+  21%     { opacity: 1; transform: translate(0, 50px) scale(0.8); }
+  25%     { opacity: 1; transform: translate(0, 50px) scale(1); }
+  33%, 100% { opacity: 0; transform: translate(0, 50px) scale(1.25); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ge-row, .ge-pinch-box, .ge-pinch-a, .ge-pinch-b, .ge-rotate-box, .ge-rotate-hand,
+  .ge-rotate-finger, .ge-fling-card, .ge-fling-finger, .ge-heart, .ge-tap-finger { animation: none; }
+  .ge-finger { opacity: 1; }
+}

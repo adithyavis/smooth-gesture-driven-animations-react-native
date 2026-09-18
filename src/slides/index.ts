@@ -11,6 +11,7 @@ import jsThreadDrawback from './js-thread-drawback';
 import animatedApi from './animated-api';
 import * as reanimatedSimple from './reanimated-simple';
 import * as gestureDriven from './gesture-driven';
+import gestureExamples from './gesture-examples';
 import quote from './quote';
 import thanks from './thanks';
 
@@ -38,6 +39,7 @@ export const slides: SlideDef[] = [
   reanimatedSimple.architecture,
   gestureDriven.demo,
   gestureDriven.timeline,
+  gestureExamples,
   quote,
   thanks,
 ];
