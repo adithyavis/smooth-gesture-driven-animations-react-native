@@ -22,28 +22,18 @@ export function ArchitectureChart({ active = null }: { active?: string[] | null 
 
       <g className={cls('col c1')}>
         <g opacity={on('react')}>
-          <rect x="0" y="196" width="170" height="58" rx="10" fill="#1b5fa8" />
-          <text x="85" y="232" className="d-box" textAnchor="middle">React</text>
-        </g>
-        <g opacity={on('types')}>
-          <rect x="0" y="262" width="170" height="54" rx="10" fill="#17538f" />
-          <text x="85" y="296" className="d-box-sm" textAnchor="middle">types</text>
+          <rect x="0" y="210" width="170" height="58" rx="10" fill="#1b5fa8" />
+          <text x="85" y="246" className="d-box" textAnchor="middle">React</text>
         </g>
         <g opacity={on('metro')}>
-          <line x1="172" y1="225" x2="244" y2="225" stroke="#9fb3c8" strokeWidth="2"
+          <line x1="172" y1="245" x2="244" y2="245" stroke="#9fb3c8" strokeWidth="2"
             markerEnd="url(#tip)" />
           <Pill x={171} y={212} w={76} label="Metro" />
-        </g>
-        <g opacity={on('codegen')}>
-          <line x1="172" y1="295" x2="506" y2="295" stroke="#9fb3c8" strokeWidth="2"
-            markerEnd="url(#tip)" />
-          <Pill x={282} y={282} w={96} label="Codegen" />
         </g>
       </g>
 
       <g className={cls('col c2')} opacity={on('bundle')}>
-        <Pill x={290} y={136} w={100} label="JS thread" />
-        <Pill x={297} y={168} w={86} label="JS vm" />
+        <Pill x={297} y={168} w={86} label="JS thread" />
         <rect x="250" y="200" width="180" height="76" rx="10" fill="#2e9fe0" />
         <text x="340" y="246" className="d-box" textAnchor="middle">JS Bundle</text>
       </g>
@@ -56,12 +46,12 @@ export function ArchitectureChart({ active = null }: { active?: string[] | null 
       </g>
 
       <g className={cls('col c3')} opacity={on('yoga')}>
-        <Pill x={595} y={4} w={140} label="Shadow thread" />
+        <Pill x={595} y={0} w={140} label="Shadow thread" />
         <rect x="558" y="32" width="214" height="66" rx="10" fill="#f0c44a" />
         <text x="665" y="74" className="d-yoga" textAnchor="middle">Yoga</text>
         <line x1="665" y1="100" x2="665" y2="174" stroke="#9fb3c8" strokeWidth="2"
           markerStart="url(#tip)" markerEnd="url(#tip)" />
-        <Pill x={680} y={112} w={96} label="UI thread" />
+        <Pill x={680} y={142} w={96} label="UI thread" />
       </g>
 
       <g className={cls('col c4')}>
@@ -79,19 +69,6 @@ export function ArchitectureChart({ active = null }: { active?: string[] | null 
         <g opacity={on('nativeModules')}>
           <rect x="558" y="258" width="214" height="62" rx="9" fill="#4a90d9" />
           <text x="665" y="296" className="d-box-sm" textAnchor="middle">Native Modules</text>
-        </g>
-        <g opacity={on('codegen', 'renderer', 'nativeModules')}>
-          <Pill x={560} y={341} w={190} label="Generated interfaces" />
-        </g>
-
-        {/* Not part of the stock diagram: Reanimated's second JS runtime,
-            which also lives on the UI thread, beside the renderer. */}
-        <g opacity={on('worklet')}>
-          <rect x="505" y="382" width="285" height="66" rx="12" fill="#6ea8fe" />
-          <text x="647" y="410" className="d-wl" textAnchor="middle">Worklet runtime</text>
-          <text x="647" y="432" className="d-wl-sub" textAnchor="middle">
-            your animation code, on the UI thread
-          </text>
         </g>
       </g>
 
