@@ -1,0 +1,62 @@
+/* ---------- <View /> to UIView ---------- */
+
+.v2u-row {
+  display: grid;
+  grid-template-columns: auto 40px auto 40px 1fr;
+  gap: 16px;
+  align-items: stretch;
+}
+
+.v2u-side {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  animation: fade-up 420ms ease-out both;
+}
+.v2u-side:nth-child(3) { animation-delay: 300ms; }
+.v2u-side:nth-child(5) { animation-delay: 600ms; }
+
+.v2u-side figcaption {
+  font-size: 22px;
+  color: var(--muted);
+  margin-bottom: 14px;
+}
+
+.layout-v2u .layout-code { flex: 1; }
+.layout-v2u .layout-code pre { height: 100%; padding: 22px 24px; }
+.layout-v2u .layout-code code { font-size: 18px; line-height: 1.6; }
+
+.v2u-arrow {
+  width: 40px;
+  align-self: center;
+  margin-top: 36px;
+}
+
+.v2u-frame {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: auto 0;
+  overflow: visible;
+}
+
+.nf-guide {
+  stroke: #9fb3c8;
+  stroke-width: 1.5;
+  stroke-dasharray: 4 4;
+}
+
+.nf-label {
+  font-size: 19px;
+  font-weight: 500;
+  fill: #dbe8f7;
+}
+
+.nf-origin {
+  font-size: 18px;
+  fill: var(--muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .v2u-side { animation: none; }
+}

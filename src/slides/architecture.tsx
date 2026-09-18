@@ -4,7 +4,7 @@ import type { SlideDef } from '../deck/types';
 function Threads() {
   return (
     <div className="layout-threads">
-      <h2>React Native, new architecture</h2>
+      <h2>How React Native Renders</h2>
       <ArchitectureChart />
     </div>
   );

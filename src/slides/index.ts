@@ -3,6 +3,8 @@ import title from './title';
 import aboutMe from './about-me';
 import * as smoothMatters from './smooth-matters';
 import * as principles from './principles';
+import nativeRendering from './native-rendering';
+import viewToUIView from './view-to-uiview';
 import architecture from './architecture';
 import viewJourney from './view-journey';
 import workletRuntime from './worklet-runtime';
@@ -24,6 +26,8 @@ export const slides: SlideDef[] = [
   principles.oneByOne,
   principles.followFinger,
   principles.rubberBand,
+  nativeRendering,
+  viewToUIView,
   architecture,
   viewJourney,
   workletRuntime,

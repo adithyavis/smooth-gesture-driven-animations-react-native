@@ -5,6 +5,17 @@
   margin-bottom: 30px;
 }
 
+/* Fill the slide, so a shorter slide's title sits at the top like the
+   architecture chart's, and centre the body in the space left below it. */
+.layout-fill {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.layout-fill > :not(h2) {
+  margin-block: auto;
+}
+
 .diagram {
   width: 100%;
   height: auto;
