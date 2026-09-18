@@ -1,0 +1,44 @@
+/* ---------- Phone frame ---------- */
+
+.phone-stage {
+  position: relative;
+  transition: opacity 300ms ease;
+}
+.phone-stage.idle { opacity: 0.3; }
+
+.phone {
+  position: absolute;
+  border-style: solid;
+  border-color: #2c2c2e;
+  border-radius: 34px;
+  background: #000;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+.phone-screen {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: 28px;
+  background: #000;
+}
+
+.phone-status {
+  position: absolute;
+  top: 9px;
+  left: 22px;
+  font-size: 10px;
+  font-weight: 600;
+  color: #fff;
+}
+
+/* A large screen title, like iOS navigation bars. */
+.phone-title {
+  position: absolute;
+  top: 26px;
+  left: 10px;
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: -0.4px;
+  color: #fff;
+}

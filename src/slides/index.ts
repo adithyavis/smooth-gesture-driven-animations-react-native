@@ -20,6 +20,8 @@ export const slides: SlideDef[] = [
   smoothMatters.duolingo,
   principles.instantOpen,
   principles.sharedOpen,
+  principles.allTogether,
+  principles.oneByOne,
   principles.followFinger,
   principles.rubberBand,
   architecture,

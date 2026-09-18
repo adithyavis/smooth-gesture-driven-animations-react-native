@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import { ListEntrance } from '../components/ListEntrance';
 import { PhotoGrid } from '../components/PhotoGrid';
 import { VolumeSlider } from '../components/VolumeSlider';
 import type { SlideDef } from '../deck/types';
@@ -18,6 +19,7 @@ function Verdict({ good }: { good: boolean }) {
 type Demo = (props: { good: boolean; playing: boolean }) => ReactNode;
 
 const Photos: Demo = ({ good, playing }) => <PhotoGrid mode={good ? 'shared' : 'cut'} playing={playing} />;
+const List: Demo = ({ good, playing }) => <ListEntrance mode={good ? 'staggered' : 'together'} playing={playing} />;
 const Volume: Demo = ({ good, playing }) => <VolumeSlider mode={good ? 'rubber' : 'plain'} playing={playing} />;
 
 /** The two versions side by side; only the one being discussed moves. */
@@ -51,6 +53,22 @@ export const sharedOpen: SlideDef = {
   notes: `Same taps. Now the photo you touched grows out of its own cell into full screen, and shrinks back into that same cell when you go back.
 
 Nothing is replaced; one object moves. You never lose track of where you are, and the motion explains the navigation for you. This is a shared element transition — what the Photos app does.`,
+};
+
+export const allTogether: SlideDef = {
+  content: <Principles Demo={List} active="left" />,
+  notes: `Every row slides up at the same moment, for the same duration. The whole screen moves as one block.
+
+Your eye has nowhere to start, so it reads as a jolt rather than as a list arriving. And every row is being animated in every frame of that half second — if one frame is late, all of them stutter at once.`,
+};
+
+export const oneByOne: SlideDef = {
+  content: <Principles Demo={List} active="right" />,
+  notes: `Same rows, same distance, same duration, same easing. The only change: each row starts about 70 ms after the one above it.
+
+Now the eye follows from top to bottom, and the list reads as arriving in order. Most of the work is spread across more frames, so a single slow frame touches a few rows, not all of them.
+
+Keep the gap small — tens of milliseconds. Long staggers feel slow, and nobody wants to wait for row twelve.`,
 };
 
 export const followFinger: SlideDef = {

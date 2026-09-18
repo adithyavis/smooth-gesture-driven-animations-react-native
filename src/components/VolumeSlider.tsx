@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { clamp01, easeInOut } from './motion';
 import './touch.css';
 import './VolumeSlider.css';
 
@@ -29,9 +30,6 @@ const MOVE_START = 0.45;
 const MOVE_END = 1.65;
 const RELEASE = 2.05;
 const GONE = 2.3;
-
-const clamp01 = (x: number) => Math.min(1, Math.max(0, x));
-const easeInOut = (x: number) => (x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2);
 
 /** The further you pull, the less it gives (UIScrollView's formula). */
 const MAX_STRETCH = 60;
