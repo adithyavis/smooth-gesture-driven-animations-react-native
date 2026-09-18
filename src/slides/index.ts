@@ -14,6 +14,7 @@ import * as gestureDriven from './gesture-driven';
 import gestureExamples from './gesture-examples';
 import * as examples from './examples';
 import googlePhotos from './google-photos';
+import learnMore from './learn-more';
 import quote from './quote';
 import thanks from './thanks';
 
@@ -47,6 +48,7 @@ export const slides: SlideDef[] = [
   examples.example1TabBar,
   examples.example2,
   googlePhotos,
+  learnMore,
   quote,
   thanks,
 ];

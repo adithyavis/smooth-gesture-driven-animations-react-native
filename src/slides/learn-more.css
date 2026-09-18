@@ -1,0 +1,14 @@
+/* ---------- Other things to learn about ---------- */
+
+/* The trailing "etc.", lined up with the bullet text. */
+.lm-etc {
+  margin: 0;
+  padding-left: 40px;
+  font-size: 32px;
+  color: var(--muted);
+  animation: fade-up 420ms cubic-bezier(0.22, 0.9, 0.24, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lm-etc { animation: none; }
+}
