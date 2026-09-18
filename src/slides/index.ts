@@ -1,6 +1,8 @@
 import type { SlideDef } from '../deck/types';
 import title from './title';
 import aboutMe from './about-me';
+import * as smoothMatters from './smooth-matters';
+import * as principles from './principles';
 import architecture from './architecture';
 import viewJourney from './view-journey';
 import workletRuntime from './worklet-runtime';
@@ -13,6 +15,11 @@ import thanks from './thanks';
 export const slides: SlideDef[] = [
   title,
   aboutMe,
+  smoothMatters.amazon,
+  smoothMatters.tinder,
+  smoothMatters.duolingo,
+  principles.followFinger,
+  principles.rubberBand,
   architecture,
   viewJourney,
   workletRuntime,

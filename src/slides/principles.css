@@ -1,0 +1,30 @@
+/* ---------- Principles of animation ---------- */
+
+.layout-principles h2 {
+  margin-bottom: 8px;
+}
+
+.principles-demos {
+  display: flex;
+  justify-content: center;
+  gap: 160px;
+}
+
+.principles-demos figure {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.principles-demos figcaption {
+  margin-top: 18px;
+  font-size: 22px;
+  color: var(--muted);
+  opacity: 0.4;
+  transition: opacity 300ms ease;
+}
+.principles-demos figure.active figcaption {
+  color: var(--fg);
+  opacity: 1;
+}
