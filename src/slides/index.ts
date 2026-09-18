@@ -15,7 +15,6 @@ import gestureExamples from './gesture-examples';
 import * as examples from './examples';
 import googlePhotos from './google-photos';
 import learnMore from './learn-more';
-import quote from './quote';
 import thanks from './thanks';
 
 /** The running order lives here, not in file names, so slides can be inserted
@@ -49,6 +48,5 @@ export const slides: SlideDef[] = [
   examples.example2,
   googlePhotos,
   learnMore,
-  quote,
   thanks,
 ];
