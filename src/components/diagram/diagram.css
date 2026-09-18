@@ -1,0 +1,146 @@
+/* ---------- Threads diagram ---------- */
+
+.layout-threads h2 {
+  font-size: 40px;
+  margin-bottom: 30px;
+}
+
+.diagram {
+  width: 100%;
+  height: auto;
+  display: block;
+  overflow: visible;
+}
+
+.diagram .col {
+  animation: diagram-in 460ms cubic-bezier(0.22, 0.9, 0.24, 1) both;
+}
+.diagram .c1 { animation-delay: 120ms; }
+.diagram .c2 { animation-delay: 220ms; }
+.diagram .c3 { animation-delay: 380ms; }
+.diagram .c4 { animation-delay: 300ms; }
+.diagram .c5 { animation-delay: 400ms; }
+
+@keyframes diagram-in {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .diagram .col { animation: none; }
+}
+
+.d-box {
+  font-size: 24px;
+  font-weight: 600;
+  fill: #fff;
+}
+
+.d-box-sm {
+  font-size: 20px;
+  font-weight: 500;
+  fill: #fff;
+}
+
+.d-yoga {
+  font-size: 26px;
+  font-weight: 600;
+  fill: #1a1a1a;
+}
+
+.d-jsi {
+  font-size: 17px;
+  font-weight: 600;
+  fill: #fff;
+  letter-spacing: 1px;
+}
+
+.d-pill {
+  font-size: 14px;
+  fill: #dbe8f7;
+}
+
+.d-wl {
+  font-size: 19px;
+  font-weight: 700;
+  fill: #0f1117;
+}
+
+.d-wl-sub {
+  font-size: 15px;
+  fill: rgba(15, 17, 23, 0.72);
+}
+
+.d-rt-name {
+  font-size: 28px;
+  font-weight: 650;
+  fill: var(--fg);
+  letter-spacing: -0.5px;
+}
+
+.d-rt-sub {
+  font-size: 17px;
+  fill: var(--muted);
+}
+
+.d-line {
+  font-size: 19px;
+  fill: #c9d3e3;
+}
+
+.d-edge {
+  font-size: 17px;
+  fill: var(--muted);
+}
+
+.d-chip {
+  font-size: 18px;
+  font-weight: 500;
+  fill: #fff;
+}
+
+.d-chip-hot {
+  font-size: 18px;
+  font-weight: 700;
+  fill: #0f1117;
+}
+
+.d-shared {
+  font-size: 21px;
+  font-weight: 700;
+  fill: #0d2b1f;
+}
+
+.d-old {
+  font-size: 19px;
+  font-weight: 600;
+  fill: #f0b4a1;
+}
+
+.d-old-sub {
+  font-size: 17px;
+  fill: #c98a74;
+}
+
+/* Dimming and re-lighting as the walkthrough advances. */
+.diagram g {
+  transition: opacity 340ms ease;
+}
+
+.journey h2 {
+  margin-bottom: 8px;
+  animation: fade-up 300ms ease-out both;
+}
+
+.journey-sub {
+  font-size: 22px;
+  color: var(--muted);
+  margin: 0 0 22px;
+  min-height: 30px;
+  animation: fade-up 300ms ease-out 60ms both;
+}
+
+.journey .diagram {
+  width: 94%;
+  margin-inline: auto;
+}

@@ -1,0 +1,103 @@
+/* ---------- About me ---------- */
+
+.layout-about {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 56px;
+}
+
+.about-text .eyebrow {
+  font-size: 18px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 14px;
+}
+
+.about-text h1 {
+  font-size: 58px;
+  line-height: 1.05;
+  letter-spacing: -1.6px;
+  margin: 0;
+  font-weight: 700;
+}
+
+.about-text .role {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 28px;
+  color: var(--muted);
+  margin: 18px 0 52px;
+}
+.about-text .role .at { color: var(--muted); }
+.about-text .company-logo {
+  height: 30px;
+  width: auto;
+  display: block;
+}
+
+.about-text h2 {
+  font-size: 22px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 600;
+  margin: 0 0 18px;
+}
+
+.about-text ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.about-text li {
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 25px;
+  line-height: 1.4;
+  padding-left: 32px;
+  position: relative;
+  margin-bottom: 16px;
+  animation: fade-up 420ms cubic-bezier(0.22, 0.9, 0.24, 1) both;
+}
+.about-text li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 12px;
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  background: var(--accent);
+}
+
+.about-demos {
+  display: flex;
+  gap: 28px;
+}
+.about-demos figure {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: fade-up 460ms cubic-bezier(0.22, 0.9, 0.24, 1) both;
+}
+.about-demos video {
+  height: 470px;
+  aspect-ratio: 1170 / 2532;
+  display: block;
+  /* Clip the black corners the recordings have outside the device frame. */
+  border-radius: 13% / 6%;
+  background: #000;
+}
+.about-demos figcaption {
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 14px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-text li, .about-demos figure { animation: none; }
+}
