@@ -1,14 +1,15 @@
 import type { SlideDef } from '../deck/types';
-import title from './01-title';
-import aboutMe from './02-about-me';
-import architecture from './03-architecture';
-import viewJourney from './04-view-journey';
-import workletRuntime from './05-worklet-runtime';
-import gestures from './06-gestures';
-import quote from './07-quote';
-import thanks from './08-thanks';
+import title from './title';
+import aboutMe from './about-me';
+import architecture from './architecture';
+import viewJourney from './view-journey';
+import workletRuntime from './worklet-runtime';
+import gestures from './gestures';
+import quote from './quote';
+import thanks from './thanks';
 
-/** The running order. Each slide lives in its own file, with its speaker notes. */
+/** The running order lives here, not in file names, so slides can be inserted
+ *  anywhere. Each slide lives in its own file, with its speaker notes. */
 export const slides: SlideDef[] = [
   title,
   aboutMe,
