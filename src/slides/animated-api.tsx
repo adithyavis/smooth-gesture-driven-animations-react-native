@@ -1,6 +1,6 @@
 import { Code } from '../components/Code';
 import { Pill } from '../components/diagram/Pill';
-import { Phone, SCREEN_H, SCREEN_W } from '../components/Phone';
+import { FINGER, Phone, SCREEN_H, SCREEN_W } from '../components/Phone';
 import '../components/diagram/diagram.css';
 import type { SlideDef } from '../deck/types';
 import './animated-api.css';
@@ -114,7 +114,7 @@ function Menu() {
 const STEPS = [
   {
     title: 'Simple animation with Animated',
-    left: <Code lang="jsx" mark={[5, 9]}>{CODE}</Code>,
+    left: <Code lang="jsx" mark={[[5, 9]]}>{CODE}</Code>,
   },
   {
     title: 'Simple animation with Animated',
@@ -127,13 +127,15 @@ const STEPS = [
   {
     title: "Simple animation with Animated",
     left: <Menu />,
+    drag: true,
   },
 ];
 
 const BOX = 56;
 
 function AnimatedApi({ step }: { step: number }) {
-  const { title, left } = STEPS[Math.min(step, STEPS.length - 1)];
+  const { title, left, drag } = STEPS[Math.min(step, STEPS.length - 1)];
+  const center = { left: (SCREEN_W - BOX) / 2, top: (SCREEN_H - BOX) / 2 };
   return (
     <div className="layout-threads layout-fill layout-animated">
       {/* Keyed by step so the title and left column replay their entrance. */}
@@ -141,14 +143,22 @@ function AnimatedApi({ step }: { step: number }) {
       <div className="an-row">
         <div className="an-left" key={`l${step}`}>{left}</div>
         <Phone playing>
-          {/* A CSS animation, so the browser runs it off the main thread too. */}
-          <div className="an-box"
-            style={{
-              width: BOX,
-              height: BOX,
-              left: (SCREEN_W - BOX) / 2,
-              top: (SCREEN_H - BOX) / 2,
-            }} />
+          {/* CSS animations, so the browser runs them off the main thread too. */}
+          {drag ? (
+            <>
+              {/* A finger drags the box around, lets go, and the box springs back. */}
+              <div className="an-box an-drag-box" style={{ width: BOX*2, height: BOX*1.2, ...center }} />
+              <div className="touch-finger an-drag-finger"
+                style={{
+                  width: FINGER,
+                  height: FINGER,
+                  left: (SCREEN_W - FINGER) / 2,
+                  top: (SCREEN_H - FINGER) / 2,
+                }} />
+            </>
+          ) : (
+            <div className="an-box an-grow-box" style={{ width: BOX, height: BOX, ...center }} />
+          )}
         </Phone>
       </div>
     </div>
