@@ -1,11 +1,13 @@
+import { useEffect, useState } from 'react';
 import { Pill } from '../components/diagram/Pill';
+import { Phone, SCREEN_H, SCREEN_W } from '../components/Phone';
 import '../components/diagram/diagram.css';
 import type { SlideDef } from '../deck/types';
 import './js-thread-drawback.css';
 
-/** One slot is one frame, 16ms. */
-const X0 = 160;
-const SLOT = 70;
+/** One slot is one frame, 16ms. Narrow enough to sit beside the phone. */
+const X0 = 130;
+const SLOT = 60;
 
 /** What the JS thread is doing, slot by slot. A tick is the animation's
  *  setScale; everything else is ordinary app work that happens to be queued. */
@@ -30,10 +32,14 @@ const updated = (i: number) => JS_WORK.some((w) => w.tick && w.from === i);
 const FROZEN = [{ from: 3, slots: 5 }, { from: 10, slots: 2 }];
 
 const slotX = (i: number) => X0 + i * SLOT;
+const LANE_X = X0 - 6;
+const LANE_W = FRAMES.length * SLOT + 12;
+const W = LANE_X + LANE_W;
 
-function ThreadsTimeline() {
+/** `busy` outlines the orange block the demo is currently stuck behind. */
+function ThreadsTimeline({ busy }: { busy?: string | null }) {
   return (
-    <svg viewBox="0 0 1072 300" className="diagram" role="img"
+    <svg viewBox={`0 0 ${W} 300`} className="diagram" role="img"
       aria-label="Two lanes, one frame per 16ms. On the JS thread, animation ticks are interrupted by JSON.parse, re-rendering a list and navigation. On the UI thread, the box's scale stops changing for every frame where a tick didn't get through.">
       {/* 16ms scale, over the first slot */}
       <g className="col c1">
@@ -44,12 +50,13 @@ function ThreadsTimeline() {
       {/* JS thread */}
       <g className="col c2">
         <Pill x={0} y={67} w={110} label="JS thread" />
-        <rect x={X0 - 10} y="30" width={1072 - X0 + 10} height="92" rx="12"
+        <rect x={LANE_X} y="30" width={LANE_W} height="92" rx="12"
           fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.14)" />
         {JS_WORK.map((w) => (
           <g key={w.from}>
-            <rect x={slotX(w.from) + 4} y="50" width={w.slots * SLOT - 8} height="52" rx="8"
-              fill={w.tick ? '#2e9fe0' : '#e8a33d'} />
+            <rect x={slotX(w.from) + 3} y="50" width={w.slots * SLOT - 6} height="52" rx="8"
+              fill={w.tick ? '#2e9fe0' : '#e8a33d'}
+              stroke={busy === w.label ? '#fff' : 'none'} strokeWidth="3" />
             <text x={slotX(w.from) + (w.slots * SLOT) / 2} y="82"
               className={w.tick ? 'jd-tick' : 'jd-work'} textAnchor="middle">{w.label}</text>
           </g>
@@ -67,11 +74,11 @@ function ThreadsTimeline() {
       {/* UI thread */}
       <g className="col c4">
         <Pill x={0} y={187} w={110} label="UI thread" />
-        <rect x={X0 - 10} y="150" width={1072 - X0 + 10} height="92" rx="12"
+        <rect x={LANE_X} y="150" width={LANE_W} height="92" rx="12"
           fill="rgba(120,180,240,0.12)" stroke="rgba(120,180,240,0.3)" />
         {FRAMES.map((scale, i) => (
           <g key={i}>
-            <rect x={slotX(i) + 4} y="170" width={SLOT - 8} height="52" rx="8"
+            <rect x={slotX(i) + 3} y="170" width={SLOT - 6} height="52" rx="8"
               fill={updated(i) ? '#4a90d9' : 'none'}
               stroke={updated(i) ? 'none' : 'rgba(240,140,110,0.7)'}
               strokeDasharray={updated(i) ? undefined : '4 4'} />
@@ -85,7 +92,7 @@ function ThreadsTimeline() {
       <g className="col c5">
         {FROZEN.map((f) => (
           <g key={f.from}>
-            <path d={`M${slotX(f.from) + 4},254 v8 h${f.slots * SLOT - 8} v-8`}
+            <path d={`M${slotX(f.from) + 3},254 v8 h${f.slots * SLOT - 6} v-8`}
               fill="none" stroke="#f0b4a1" strokeWidth="1.5" />
             <text x={slotX(f.from) + (f.slots * SLOT) / 2} y="288" className="jd-frozen"
               textAnchor="middle">box frozen</text>
@@ -96,15 +103,80 @@ function ThreadsTimeline() {
   );
 }
 
+/** The demo's JS thread, in real time: bursts of 16ms ticks, each adding
+ *  0.05 to the scale, stuck behind the same work as the timeline. */
+const TICK_MS = 16;
+const SCHEDULE: ({ ticks: number } | { busy: string; ms: number } | { hold: number })[] = [
+  { ticks: 4 },
+  { busy: 'JSON.parse', ms: 180 },
+  { ticks: 5 },
+  { busy: 'Re-render list', ms: 280 },
+  { ticks: 4 },
+  { busy: 'Navigation', ms: 200 },
+  { ticks: 7 },
+  { hold: 1000 },
+];
+const segMs = (seg: (typeof SCHEDULE)[number]) =>
+  'ticks' in seg ? seg.ticks * TICK_MS : 'busy' in seg ? seg.ms : seg.hold;
+const LOOP_MS = SCHEDULE.reduce((sum, seg) => sum + segMs(seg), 0);
+
+/** Where the loop is at `t` ms: the box's scale, and what JS is stuck on. */
+function stateAt(t: number): { scale: number; busy: string | null } {
+  let ticks = 0;
+  for (const seg of SCHEDULE) {
+    const ms = segMs(seg);
+    if (t < ms) {
+      if ('ticks' in seg) ticks += Math.floor(t / TICK_MS) + 1;
+      return { scale: 1 + ticks * 0.05, busy: 'busy' in seg ? seg.busy : null };
+    }
+    if ('ticks' in seg) ticks += seg.ticks;
+    t -= ms;
+  }
+  return { scale: 2, busy: null };
+}
+
+const BOX = 56;
+
+function useStutterLoop() {
+  const [scale, setScale] = useState(1);
+  const [busy, setBusy] = useState<string | null>(null);
+  useEffect(() => {
+    const start = performance.now();
+    let raf = 0;
+    const frame = (now: number) => {
+      const next = stateAt((now - start) % LOOP_MS);
+      setScale(next.scale);
+      setBusy(next.busy);
+      raf = requestAnimationFrame(frame);
+    };
+    raf = requestAnimationFrame(frame);
+    return () => cancelAnimationFrame(raf);
+  }, []);
+  return { scale, busy };
+}
+
 function JsThreadDrawback() {
+  const { scale } = useStutterLoop();
   return (
     <div className="layout-threads layout-fill">
       <h2>Simple animation</h2>
-      <div>
-        <ThreadsTimeline />
-        <p className="jd-takeaway">
-          The animation waits in line with everything else on the JS thread.
-        </p>
+      <div className="jd-row">
+        <div>
+          <ThreadsTimeline />
+          <p className="jd-takeaway">
+            The animation waits in line with everything else on the JS thread.
+          </p>
+        </div>
+        <Phone playing>
+          <div className="jd-box"
+            style={{
+              width: BOX,
+              height: BOX,
+              left: (SCREEN_W - BOX) / 2,
+              top: (SCREEN_H - BOX) / 2,
+              transform: `scale(${scale})`,
+            }} />
+        </Phone>
       </div>
     </div>
   );
@@ -115,6 +187,8 @@ const slide: SlideDef = {
   notes: `Why the last slide's animation breaks in a real app.
 
 TOP LANE — the JS thread, one box per 16ms frame. The blue ticks are our setScale. The orange blocks are normal app work: parsing an API response, re-rendering a list, a navigation transition. JS runs one thing at a time, so the tick has to wait its turn.
+
+THE PHONE — the same pattern in real time. Watch the box grow, stop, jump. Each time it stops, the orange block it's stuck behind is outlined on the timeline, and the phone says what JS is busy with.
 
 BOTTOM LANE — the UI thread still draws every 16ms. It just has nothing new to draw. Follow the numbers: 1.15 sits there for five frames, then jumps. That's the stutter people see.
 

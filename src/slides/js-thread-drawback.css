@@ -1,40 +1,67 @@
 /* ---------- Drawback of animating from the JS thread ---------- */
 
 .jd-tick {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 600;
   fill: #fff;
 }
 
 .jd-work {
-  font-size: 17px;
+  font-size: 19px;
   font-weight: 600;
   fill: #1a1a1a;
 }
 
 .jd-frame {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 600;
   fill: #fff;
 }
 
 .jd-stale {
-  font-size: 16px;
+  font-size: 18px;
   fill: #f0b4a1;
 }
 
 .jd-frozen {
-  font-size: 17px;
+  font-size: 19px;
   font-weight: 600;
   fill: #f0b4a1;
 }
 
+.jd-row {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+.jd-row > div:first-child { flex: 1; min-width: 0; }
+
 .jd-takeaway {
   font-size: 24px;
   color: var(--muted);
-  margin: 36px 0 0;
+  margin: 28px 0 0;
   animation: fade-up 420ms ease-out 500ms both;
 }
+
+.jd-box {
+  position: absolute;
+  background: #0a84ff;
+  border-radius: 6px;
+}
+
+/* What JS is stuck on, shown only while the box is frozen. */
+.jd-busy {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 34px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 600;
+  color: #e8a33d;
+  opacity: 0;
+}
+.jd-busy.on { opacity: 1; }
 
 @media (prefers-reduced-motion: reduce) {
   .jd-takeaway { animation: none; }
