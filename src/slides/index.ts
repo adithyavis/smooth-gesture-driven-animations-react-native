@@ -12,6 +12,7 @@ import animatedApi from './animated-api';
 import * as reanimatedSimple from './reanimated-simple';
 import * as gestureDriven from './gesture-driven';
 import gestureExamples from './gesture-examples';
+import * as examples from './examples';
 import quote from './quote';
 import thanks from './thanks';
 
@@ -40,6 +41,9 @@ export const slides: SlideDef[] = [
   gestureDriven.demo,
   gestureDriven.timeline,
   gestureExamples,
+  examples.example1,
+  examples.example1Sequence,
+  examples.example1TabBar,
   quote,
   thanks,
 ];
