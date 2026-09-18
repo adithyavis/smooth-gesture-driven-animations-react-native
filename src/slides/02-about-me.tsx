@@ -1,7 +1,7 @@
 import type { SlideDef } from '../deck/types';
 import './about-me.css';
 
-const PACKAGES = ['react-native-canvas-kit', 'reanimated-tab-view', 'awesome-mobile-app-animations'];
+const PACKAGES = ['react-native-canvas-kit', 'reanimated-tab-view', 'awesome-mobile-app-animations', "etc"];
 
 const DEMOS = [
   { src: '/videos/signature-pad.mp4', label: 'react-native-canvas-kit' },
@@ -13,7 +13,6 @@ function AboutMe() {
     <div className="layout-about">
       <div className="about-text">
         <p className="eyebrow">About me</p>
-        <h1>Adithya Viswamithiran</h1>
         <p className="role">
           Staff Software Engineer
           <span className="at">@</span>
