@@ -1,0 +1,22 @@
+/* ---------- Simple animation ---------- */
+
+.sa-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 48px;
+  animation: fade-up 420ms ease-out both;
+}
+
+.layout-simple .layout-code pre { padding: 26px 30px; }
+.layout-simple .layout-code code { font-size: 20px; line-height: 1.6; }
+
+.sa-box {
+  position: absolute;
+  background: #0a84ff;
+  border-radius: 6px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sa-row { animation: none; }
+}

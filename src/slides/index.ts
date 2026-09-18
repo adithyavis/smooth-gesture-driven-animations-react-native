@@ -6,6 +6,7 @@ import * as principles from './principles';
 import nativeRendering from './native-rendering';
 import viewToUIView from './view-to-uiview';
 import architecture from './architecture';
+import simpleAnimation from './simple-animation';
 import workletRuntime from './worklet-runtime';
 import gestures from './gestures';
 import quote from './quote';
@@ -28,6 +29,7 @@ export const slides: SlideDef[] = [
   nativeRendering,
   viewToUIView,
   architecture,
+  simpleAnimation,
   workletRuntime,
   gestures,
   quote,
