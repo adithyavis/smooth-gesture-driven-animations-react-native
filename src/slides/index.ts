@@ -18,6 +18,8 @@ export const slides: SlideDef[] = [
   smoothMatters.amazon,
   smoothMatters.tinder,
   smoothMatters.duolingo,
+  principles.instantOpen,
+  principles.sharedOpen,
   principles.followFinger,
   principles.rubberBand,
   architecture,

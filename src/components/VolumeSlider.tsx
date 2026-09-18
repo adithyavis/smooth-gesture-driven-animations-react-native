@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import './touch.css';
 import './VolumeSlider.css';
 
 /** Rest size of the pill, and where it sits inside the fixed-size stage. */
@@ -113,7 +114,7 @@ export function VolumeSlider({ mode, playing }: { mode: 'plain' | 'rubber'; play
         </svg>
       </div>
       {playing && (
-        <div ref={finger} className="vs-finger"
+        <div ref={finger} className="touch-finger"
           style={{ width: FINGER, height: FINGER, left: (STAGE_W - FINGER) / 2, opacity: 0 }} />
       )}
     </div>
