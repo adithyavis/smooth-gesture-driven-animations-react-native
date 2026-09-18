@@ -84,7 +84,7 @@ export default function Deck({ slides }: { slides: SlideDef[] }) {
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [go, index, slides.length]);
+  }, [back, forward, go, slides.length]);
 
   useLayoutEffect(() => {
     const fit = () => {

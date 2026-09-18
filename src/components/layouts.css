@@ -105,3 +105,30 @@
 .layout-code .tok-member  { color: #d2a8ff; }
 .layout-code .tok-comment { color: #8b949e; font-style: italic; }
 .layout-code h2 { font-size: 38px; margin-bottom: 30px; }
+
+/* A band behind the lines worth pointing at. The code element is its own
+   stacking context, so the band sits above the pre's fill but under the text. */
+.layout-code code:has(.code-mark) {
+  display: block;
+  position: relative;
+  isolation: isolate;
+}
+.layout-code .code-mark {
+  position: absolute;
+  left: -14px;
+  right: -14px;
+  z-index: -1;
+  border-radius: 8px;
+  background: rgba(110, 168, 254, 0.2);
+  box-shadow: inset 3px 0 0 var(--accent);
+  animation: code-mark-in 420ms ease-out 500ms both;
+}
+
+@keyframes code-mark-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .layout-code .code-mark { animation: none; }
+}

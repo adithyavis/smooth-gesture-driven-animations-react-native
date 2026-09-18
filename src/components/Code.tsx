@@ -38,10 +38,27 @@ function highlight(src: string, lang: Lang): ReactNode[] {
   return out;
 }
 
-export function Code({ lang, children }: { lang: Lang; children: string }) {
+export function Code({
+  lang,
+  mark,
+  children,
+}: {
+  lang: Lang;
+  /** Lines to highlight, 1-based and inclusive: [from, to]. */
+  mark?: [number, number];
+  children: string;
+}) {
   return (
     <div className="layout-code">
-      <pre><code>{highlight(children, lang)}</code></pre>
+      <pre>
+        <code>
+          {mark && (
+            <span className="code-mark" aria-hidden="true"
+              style={{ top: `${mark[0] - 1}lh`, height: `${mark[1] - mark[0] + 1}lh` }} />
+          )}
+          {highlight(children, lang)}
+        </code>
+      </pre>
     </div>
   );
 }

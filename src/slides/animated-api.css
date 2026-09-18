@@ -1,0 +1,133 @@
+/* ---------- Animated, with the native driver ---------- */
+
+.an-title {
+  animation: fade-up 300ms ease-out both;
+}
+
+.an-row {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.an-left {
+  flex: 1;
+  min-width: 0;
+  animation: fade-up 420ms ease-out both;
+}
+
+.layout-animated .layout-code pre { padding: 22px 28px; }
+.layout-animated .layout-code code { font-size: 18px; line-height: 1.55; }
+
+/* Timeline */
+
+.an-start {
+  font-size: 15px;
+  font-weight: 600;
+  fill: #fff;
+}
+
+.an-work {
+  font-size: 19px;
+  font-weight: 600;
+  fill: #1a1a1a;
+}
+
+.an-frame {
+  font-size: 18px;
+  font-weight: 600;
+  fill: #fff;
+}
+
+.an-handoff {
+  font-size: 17px;
+  fill: var(--muted);
+}
+
+.an-smooth {
+  font-size: 19px;
+  font-weight: 600;
+  fill: #56c596;
+}
+
+.an-takeaway {
+  font-size: 24px;
+  color: var(--muted);
+  margin: 28px 0 0;
+}
+
+/* What the native driver accepts */
+
+.an-menu {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
+
+.an-menu h3 {
+  font-size: 26px;
+  font-weight: 650;
+  margin: 0 0 18px;
+  color: #56c596;
+}
+.an-menu .off h3 { color: #f0b4a1; }
+
+.an-menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.an-menu li {
+  font-size: 22px;
+  line-height: 1.4;
+  color: #c9d3e3;
+  padding-left: 30px;
+  position: relative;
+  margin-bottom: 14px;
+}
+.an-menu li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: #56c596;
+  font-weight: 700;
+}
+.an-menu .off li::before {
+  content: "✕";
+  color: #f0b4a1;
+}
+
+/* The phone: an ease-in-out grow, a pause, then start over. */
+
+.an-box {
+  position: absolute;
+  background: #0a84ff;
+  border-radius: 6px;
+  animation: an-grow 2000ms infinite;
+}
+
+@keyframes an-grow {
+  0%   { transform: scale(1); animation-timing-function: ease-in-out; }
+  50%  { transform: scale(2); }
+  100% { transform: scale(2); }
+}
+
+/* Shown once the timeline is up, to say JS is busy while the box keeps moving. */
+.an-busy {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 34px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 600;
+  color: #e8a33d;
+  opacity: 0;
+  transition: opacity 300ms ease;
+}
+.an-busy.on { opacity: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  .an-title, .an-left, .an-box { animation: none; }
+}
