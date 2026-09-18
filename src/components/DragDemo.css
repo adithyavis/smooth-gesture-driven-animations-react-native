@@ -1,0 +1,43 @@
+/* ---------- Drag demo ---------- */
+
+/* A finger drags the box around, lets go, and it springs home. Sideways
+   offsets stay within about 32px, so the scaled-up card never leaves the screen.
+   Box and finger share the same offsets while the finger is down. */
+
+.drag-box {
+  position: absolute;
+  background: #0a84ff;
+  border-radius: 6px;
+  animation: drag-box 4200ms infinite;
+}
+.drag-finger {
+  opacity: 0;
+  transition: none;
+  animation: drag-finger 4200ms infinite;
+}
+
+@keyframes drag-box {
+  0%, 10% { transform: translate(0, 0) scale(1); }
+  14%     { transform: translate(0, 0) scale(1.08); animation-timing-function: ease-in-out; }
+  30%     { transform: translate(-30px, -110px) scale(1.08); animation-timing-function: ease-in-out; }
+  46%     { transform: translate(32px, -50px) scale(1.08); animation-timing-function: ease-in-out; }
+  62%     { transform: translate(28px, 105px) scale(1.08); animation-timing-function: ease-in-out; }
+  74%     { transform: translate(-30px, 70px) scale(1.08); animation-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1); }
+  90%, 100% { transform: translate(0, 0) scale(1); }
+}
+
+@keyframes drag-finger {
+  0%      { opacity: 0; transform: translate(0, 0) scale(1.25); }
+  8%      { opacity: 1; transform: translate(0, 0) scale(1); }
+  14%     { opacity: 1; transform: translate(0, 0) scale(0.86); animation-timing-function: ease-in-out; }
+  30%     { transform: translate(-30px, -110px) scale(0.86); animation-timing-function: ease-in-out; }
+  46%     { transform: translate(32px, -50px) scale(0.86); animation-timing-function: ease-in-out; }
+  62%     { transform: translate(28px, 105px) scale(0.86); animation-timing-function: ease-in-out; }
+  74%     { opacity: 1; transform: translate(-30px, 70px) scale(0.86); }
+  78%     { opacity: 1; transform: translate(-30px, 70px) scale(1); }
+  86%, 100% { opacity: 0; transform: translate(-30px, 70px) scale(1.25); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .drag-box, .drag-finger { animation: none; }
+}

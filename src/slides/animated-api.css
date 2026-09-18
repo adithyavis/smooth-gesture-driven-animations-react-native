@@ -113,38 +113,6 @@
   100% { transform: scale(2); }
 }
 
-/* The last step: a finger drags the box around, lets go, and it springs home.
-   Box and finger share the same offsets while the finger is down. */
-
-.an-drag-box { animation: an-drag-box 4200ms infinite; }
-.an-drag-finger {
-  opacity: 0;
-  transition: none;
-  animation: an-drag-finger 4200ms infinite;
-}
-
-@keyframes an-drag-box {
-  0%, 10% { transform: translate(0, 0) scale(1); }
-  14%     { transform: translate(0, 0) scale(1.08); animation-timing-function: ease-in-out; }
-  30%     { transform: translate(-38px, -110px) scale(1.08); animation-timing-function: ease-in-out; }
-  46%     { transform: translate(44px, -50px) scale(1.08); animation-timing-function: ease-in-out; }
-  62%     { transform: translate(34px, 105px) scale(1.08); animation-timing-function: ease-in-out; }
-  74%     { transform: translate(-40px, 70px) scale(1.08); animation-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1); }
-  90%, 100% { transform: translate(0, 0) scale(1); }
-}
-
-@keyframes an-drag-finger {
-  0%      { opacity: 0; transform: translate(0, 0) scale(1.25); }
-  8%      { opacity: 1; transform: translate(0, 0) scale(1); }
-  14%     { opacity: 1; transform: translate(0, 0) scale(0.86); animation-timing-function: ease-in-out; }
-  30%     { transform: translate(-38px, -110px) scale(0.86); animation-timing-function: ease-in-out; }
-  46%     { transform: translate(44px, -50px) scale(0.86); animation-timing-function: ease-in-out; }
-  62%     { transform: translate(34px, 105px) scale(0.86); animation-timing-function: ease-in-out; }
-  74%     { opacity: 1; transform: translate(-40px, 70px) scale(0.86); }
-  78%     { opacity: 1; transform: translate(-40px, 70px) scale(1); }
-  86%, 100% { opacity: 0; transform: translate(-40px, 70px) scale(1.25); }
-}
-
 /* Shown once the timeline is up, to say JS is busy while the box keeps moving. */
 .an-busy {
   position: absolute;
@@ -161,5 +129,5 @@
 .an-busy.on { opacity: 1; }
 
 @media (prefers-reduced-motion: reduce) {
-  .an-title, .an-left, .an-box, .an-drag-finger { animation: none; }
+  .an-title, .an-left, .an-box { animation: none; }
 }

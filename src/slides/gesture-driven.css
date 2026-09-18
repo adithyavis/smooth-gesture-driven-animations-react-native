@@ -1,0 +1,53 @@
+/* ---------- Gesture driven animation ---------- */
+
+.gd-row {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  animation: fade-up 420ms ease-out both;
+}
+
+.gd-left {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Twenty lines have to fit beside the phone, so a touch smaller than the other code slides. */
+.layout-gesture .layout-code pre { padding: 18px 28px; }
+.layout-gesture .layout-code code { font-size: 15px; line-height: 1.4; }
+
+/* Timeline */
+
+.gd-reg {
+  font-size: 14px;
+  font-weight: 600;
+  fill: #fff;
+}
+
+/* Gesture callbacks are orange blocks; dark text reads better on them. */
+.gd-delta {
+  font-size: 17px;
+  font-weight: 700;
+  fill: #1a1a1a;
+}
+
+.gd-end {
+  font-size: 15px;
+  font-weight: 700;
+  fill: #1a1a1a;
+}
+
+.gd-frame {
+  font-size: 18px;
+  font-weight: 600;
+  fill: #fff;
+}
+
+.gd-note {
+  font-size: 17px;
+  fill: var(--muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gd-row { animation: none; }
+}

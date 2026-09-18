@@ -1,6 +1,7 @@
 import { Code } from '../components/Code';
 import { Pill } from '../components/diagram/Pill';
-import { FINGER, Phone, SCREEN_H, SCREEN_W } from '../components/Phone';
+import { DragDemo } from '../components/DragDemo';
+import { Phone, SCREEN_H, SCREEN_W } from '../components/Phone';
 import '../components/diagram/diagram.css';
 import type { SlideDef } from '../deck/types';
 import './animated-api.css';
@@ -142,24 +143,14 @@ function AnimatedApi({ step }: { step: number }) {
       <h2 key={`t${step}`} className="an-title">{title}</h2>
       <div className="an-row">
         <div className="an-left" key={`l${step}`}>{left}</div>
-        <Phone playing>
-          {/* CSS animations, so the browser runs them off the main thread too. */}
-          {drag ? (
-            <>
-              {/* A finger drags the box around, lets go, and the box springs back. */}
-              <div className="an-box an-drag-box" style={{ width: BOX*2, height: BOX*1.2, ...center }} />
-              <div className="touch-finger an-drag-finger"
-                style={{
-                  width: FINGER,
-                  height: FINGER,
-                  left: (SCREEN_W - FINGER) / 2,
-                  top: (SCREEN_H - FINGER) / 2,
-                }} />
-            </>
-          ) : (
+        {drag ? (
+          <DragDemo />
+        ) : (
+          <Phone playing>
+            {/* A CSS animation, so the browser runs it off the main thread too. */}
             <div className="an-box an-grow-box" style={{ width: BOX, height: BOX, ...center }} />
-          )}
-        </Phone>
+          </Phone>
+        )}
       </div>
     </div>
   );
