@@ -1,0 +1,82 @@
+/* ---------- Simple animation with Reanimated ---------- */
+
+.ra-row {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  animation: fade-up 420ms ease-out both;
+}
+
+.ra-left {
+  flex: 1;
+  min-width: 0;
+}
+
+.layout-reanimated .layout-code pre { padding: 22px 28px; }
+.layout-reanimated .layout-code code { font-size: 18px; line-height: 1.55; }
+
+/* The phone: an ease-in-out grow, a pause, then start over. */
+.ra-box {
+  position: absolute;
+  background: #0a84ff;
+  border-radius: 6px;
+  animation: ra-grow 2000ms infinite;
+}
+
+@keyframes ra-grow {
+  0%   { transform: scale(1); animation-timing-function: ease-in-out; }
+  50%  { transform: scale(2); }
+  100% { transform: scale(2); }
+}
+
+/* Architecture diagram */
+
+.ra-code {
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 16px;
+  fill: #dbe4f3;
+}
+
+.ra-host {
+  font-size: 14px;
+  fill: #9fd9bd;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ra-row, .ra-box, .ra-arch { animation: none; }
+}
+
+/* Architecture: the code stands in for the JS thread, beside JSI and the UI thread. */
+.ra-arch {
+  display: flex;
+  /* Top-aligned, so the JS thread and UI thread labels share a line. */
+  align-items: flex-start;
+  gap: 24px;
+  animation: fade-up 420ms ease-out both;
+}
+.ra-arch > .diagram {
+  flex: 1;
+  min-width: 0;
+}
+
+.ra-arch-code {
+  flex: none;
+  transition: opacity 340ms ease;
+}
+.ra-arch-code.idle { opacity: 0.3; }
+.ra-arch-code .layout-code pre { padding: 18px 20px; }
+.ra-arch-code .layout-code code { font-size: 15px; line-height: 1.55; }
+/* Moving from line to line should be quick, not replay the slide's entrance delay. */
+.ra-arch-code .code-mark { animation-delay: 0ms !important; animation-duration: 260ms; }
+
+/* Matches the diagram's thread pills. */
+.ra-pill {
+  display: inline-block;
+  margin: 0 0 10px 20px;
+  padding: 3px 16px;
+  border-radius: 13px;
+  background: #242c3a;
+  border: 1px solid rgba(120, 180, 240, 0.28);
+  font-size: 14px;
+  color: #dbe8f7;
+}

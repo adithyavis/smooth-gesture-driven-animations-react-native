@@ -44,18 +44,22 @@ export function Code({
   children,
 }: {
   lang: Lang;
-  /** Lines to highlight, 1-based and inclusive: [from, to]. */
-  mark?: [number, number];
+  /** Line ranges to highlight, 1-based and inclusive: [[from, to], ...]. */
+  mark?: [number, number][];
   children: string;
 }) {
   return (
     <div className="layout-code">
       <pre>
         <code>
-          {mark && (
-            <span className="code-mark" aria-hidden="true"
-              style={{ top: `${mark[0] - 1}lh`, height: `${mark[1] - mark[0] + 1}lh` }} />
-          )}
+          {mark?.map(([from, to], i) => (
+            <span key={from} className="code-mark" aria-hidden="true"
+              style={{
+                top: `${from - 1}lh`,
+                height: `${to - from + 1}lh`,
+                animationDelay: `${500 + i * 180}ms`,
+              }} />
+          ))}
           {highlight(children, lang)}
         </code>
       </pre>

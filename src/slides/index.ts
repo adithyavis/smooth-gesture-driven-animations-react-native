@@ -9,6 +9,7 @@ import architecture from './architecture';
 import simpleAnimation from './simple-animation';
 import jsThreadDrawback from './js-thread-drawback';
 import animatedApi from './animated-api';
+import * as reanimatedSimple from './reanimated-simple';
 import workletRuntime from './worklet-runtime';
 import gestures from './gestures';
 import quote from './quote';
@@ -34,6 +35,8 @@ export const slides: SlideDef[] = [
   simpleAnimation,
   jsThreadDrawback,
   animatedApi,
+  reanimatedSimple.demo,
+  reanimatedSimple.architecture,
   workletRuntime,
   gestures,
   quote,
