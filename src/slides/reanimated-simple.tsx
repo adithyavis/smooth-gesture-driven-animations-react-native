@@ -118,12 +118,10 @@ function ArchitectureDiagram({ active }: { active: string[] }) {
           markerEnd="url(#tip3)" />
       </g>
       <g opacity={on('jsTiming')}>
-        <text x="100" y={ROW_TIMING - 12} className="d-edge" textAnchor="middle">sent once</text>
         <line x1="0" y1={ROW_TIMING} x2="198" y2={ROW_TIMING} stroke="#9fb3c8" strokeWidth="2"
           markerEnd="url(#tip3)" />
       </g>
       <g opacity={on('jsStyle')}>
-        <text x="100" y={ROW_STYLE + 26} className="d-edge" textAnchor="middle">copied once</text>
         <line x1="0" y1={ROW_STYLE} x2="198" y2={ROW_STYLE} stroke="#9fb3c8" strokeWidth="2"
           markerEnd="url(#tip3)" />
       </g>
@@ -133,10 +131,9 @@ function ArchitectureDiagram({ active }: { active: string[] }) {
         <text x="275" y={ROW_TIMING + 6} className="d-chip-hot" textAnchor="middle">withTiming</text>
       </g>
       <g opacity={on('frame')}>
-        <rect x="394" y={ROW_TIMING - 23} width="150" height="46" rx="9" fill="#4a90d9" />
-        <text x="469" y={ROW_TIMING + 6} className="d-chip" textAnchor="middle">new frame</text>
-        <line x1="392" y1={ROW_TIMING} x2="354" y2={ROW_TIMING} stroke="#9fb3c8" strokeWidth="2"
-          markerEnd="url(#tip3)" />
+        <path d={`M 469 ${ROW_STYLE - 25} V ${ROW_TIMING} H 354`} fill="none" stroke="#9fb3c8"
+          strokeWidth="2" markerEnd="url(#tip3)" />
+        <text x="449" y={ROW_TIMING - 5 } className="d-chip" textAnchor="middle">every frame</text>
       </g>
 
       {/* The animation writes the value; the style reads it back. */}
@@ -160,14 +157,7 @@ function ArchitectureDiagram({ active }: { active: string[] }) {
           markerEnd="url(#tip3)" />
         <rect x="394" y={ROW_STYLE - 23} width="150" height="46" rx="9" fill="#4a90d9" />
         <text x="469" y={ROW_STYLE + 6} className="d-chip" textAnchor="middle">native view</text>
-      </g>
-
-      {/* ---- the per-frame loop ---- */}
-      <g opacity={on('loop')}>
-        <line x1="469" y1={ROW_STYLE - 25} x2="469" y2={ROW_TIMING + 27} stroke="#9fb3c8"
-          strokeWidth="2" markerEnd="url(#tip3)" />
-        <text x="456" y={ROW_SHARED + 6} className="d-edge" textAnchor="end">every frame</text>
-      </g>
+      </g>     
     </svg>
   );
 }
