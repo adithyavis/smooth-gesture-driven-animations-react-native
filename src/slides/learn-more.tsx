@@ -7,6 +7,8 @@ const TOPICS = [
   'Shared element transitions',
   'Layout animations',
   'Native gestures',
+  "Skia",
+  "WebGPU"
 ];
 
 function LearnMore() {
