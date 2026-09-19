@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
-import type { ReactNode } from 'react';
+import type { MouseEvent, ReactNode } from 'react';
 import type { SlideDef } from './types';
 import './deck.css';
 
@@ -96,8 +96,31 @@ export default function Deck({ slides }: { slides: SlideDef[] }) {
     return () => window.removeEventListener('resize', fit);
   }, [showNotes]);
 
+  // PowerPoint-style mouse control: left click moves forward, right click moves back.
+  // Clicks on links, buttons and the notes panel keep their normal behaviour.
+  const isControl = (target: EventTarget) =>
+    target instanceof Element && target.closest('a, button, input, textarea, select, .notes') !== null;
+
+  const onClick = (e: MouseEvent) => {
+    if (isControl(e.target)) return;
+    // Don't advance when the click was the end of selecting text.
+    if (window.getSelection()?.toString()) return;
+    forward();
+  };
+
+  const onContextMenu = (e: MouseEvent) => {
+    if (isControl(e.target)) return;
+    e.preventDefault();
+    back();
+  };
+
   return (
-    <div className={`deck ${showNotes ? 'with-notes' : ''}`} ref={rootRef}>
+    <div
+      className={`deck ${showNotes ? 'with-notes' : ''}`}
+      ref={rootRef}
+      onClick={onClick}
+      onContextMenu={onContextMenu}
+    >
       <div
         className="stage"
         style={{
